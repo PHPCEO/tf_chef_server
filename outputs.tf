@@ -9,6 +9,9 @@ output "credentials" {
 output "fqdn" {
   value            = "${aws_instance.chef-server.tags.Name}"
 }
+output "instance_id" {
+  value            = "${aws_instance.chef-server.id}"
+}
 output "knife_rb" {
   value            = ".chef/knife.rb"
 }
