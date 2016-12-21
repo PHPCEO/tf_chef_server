@@ -210,11 +210,17 @@ resource "aws_instance" "chef-server" {
     ]
   }
 }
+
+resource "aws_eip" "chef-server" {
+  instance = "${aws_instance.chef-server.id}"
+  vpc      = true
+}
+
 # Register Chef server against itself
 resource "null_resource" "chef_chef-server" {
   depends_on = ["aws_instance.chef-server"]
   connection {
-    host        = "${aws_instance.chef-server.public_ip}"
+    host        = "${aws_eip.chef-server.public_ip}"
     user        = "${lookup(var.ami_usermap, var.ami_os)}"
     private_key = "${file("${var.instance_key["file"]}")}"
   }

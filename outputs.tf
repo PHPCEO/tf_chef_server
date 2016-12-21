@@ -26,7 +26,7 @@ output "private_ip" {
   value            = "${aws_instance.chef-server.private_ip}"
 }
 output "public_ip" {
-  value            = "${aws_instance.chef-server.public_ip}"
+  value            = "${aws_eip.chef-server.public_ip}"
 }
 output "secret_file" {
   value            = ".chef/encrypted_data_bag_secret"
